@@ -79,6 +79,21 @@ CRIME_CATEGORY_BASE_SCORES = {
     "e-commerce fraud": 10,
     "e-commerce / lottery fraud": 10,
     "other / unknown": 0,
+
+    # Official NCRP / LSTM Deep Learning Categories
+    "child pornography cpchild sexual abuse material csam": 50,
+    "cyber terrorism": 50,
+    "online cyber trafficking": 50,
+    "rapegang rape rgrsexually abusive content": 50,
+    "sexually explicit act": 40,
+    "sexually obscene material": 35,
+    "cyber attack/ dependent crimes": 35,
+    "hacking  damage to computercomputer system etc": 30,
+    "cryptocurrency crime": 24,
+    "online financial fraud": 25,
+    "online gambling  betting": 20,
+    "online and social media related crime": 18,
+    "any other cyber crime": 10,
 }
 
 FINANCIAL_THRESHOLDS = [

@@ -133,9 +133,48 @@ async def send_message(
         msg.content for msg in all_messages if msg.role == "user"
     ) + " " + data.message
 
-    # 4. Classify crime type
-    classifier = get_classifier()
-    classification = classifier.predict(user_messages_text)
+    # 4. Classify crime type using primary LSTM Deep Learning Classifier
+    from app.ml.lstm_classifier import get_lstm_classifier
+    from app.ml.category_adapter import adapt_lstm_prediction
+
+    existing_category = merged_entities.get("authoritative_category")
+    existing_confidence = complaint.crime_category_confidence
+
+    lstm_classifier = get_lstm_classifier()
+    lstm_output = lstm_classifier.predict(user_messages_text)
+    adapted = adapt_lstm_prediction(
+        lstm_output,
+        input_text=data.message,
+        existing_category=existing_category,
+        existing_confidence=existing_confidence,
+    )
+    classification = adapted.to_dict()
+
+    # Traditional multi-model classifier preserved for comparison / rollback; does not override LSTM
+    traditional_classifier = get_classifier()
+    traditional_output = traditional_classifier.predict(user_messages_text)
+    classification["traditional_comparison"] = {
+        "category": traditional_output.get("category"),
+        "confidence": traditional_output.get("confidence"),
+        "method": traditional_output.get("method"),
+    }
+    classification["indicators"] = traditional_output.get("indicators", [])
+
+    # Store authoritative deep learning output in entity metadata for transparency
+    merged_entities["authoritative_category"] = adapted.authoritative_category
+    merged_entities["lstm_prediction"] = {
+        "category": adapted.authoritative_category,
+        "confidence": adapted.confidence,
+        "legacy_category": adapted.legacy_category,
+        "is_direct_mapping": adapted.is_direct_mapping,
+        "mapping_note": adapted.mapping_note,
+        "alternatives": adapted.alternatives,
+        "status": adapted.status,
+        "is_confident": adapted.is_confident,
+        "needs_clarification": adapted.needs_clarification,
+        "raw_category": adapted.raw_category,
+        "raw_confidence": adapted.raw_confidence,
+    }
 
     # 5. Update financial loss from entities
     financial_loss = 0.0
@@ -275,12 +314,14 @@ async def send_message(
     # Auto-generate meaningful case title
     if not complaint.title or complaint.title.startswith("Untitled") or complaint.title.startswith("Case #"):
         cat_name = classification.get("category") or "Cybercrime"
-        loss_text = f" — ₹{financial_loss:,.0f}" if financial_loss > 0 else ""
-        complaint.title = f"{cat_name}{loss_text}"
+        if cat_name not in ("Pending Incident Details", "Unclassified"):
+            loss_text = f" — ₹{financial_loss:,.0f}" if financial_loss > 0 else ""
+            complaint.title = f"{cat_name}{loss_text}"
 
     # 16. Update complaint with latest analysis
     complaint.extracted_entities = merged_entities
-    complaint.crime_category = classification.get("category")
+    # Assign enum-safe legacy category for DB persistence while preserving authoritative LSTM output in entities and response
+    complaint.crime_category = classification.get("legacy_category") or "Other / Unknown"
     complaint.crime_category_confidence = classification.get("confidence", 0.0)
     complaint.crime_indicators = classification.get("indicators", [])
     complaint.risk_level = risk_result.level
@@ -297,9 +338,23 @@ async def send_message(
         extracted_entities=merged_entities,
         classification={
             "category": classification.get("category"),
+            "authoritative_category": classification.get("authoritative_category") or classification.get("category"),
             "confidence": classification.get("confidence"),
+            "legacy_category": classification.get("legacy_category"),
+            "is_direct_mapping": classification.get("is_direct_mapping"),
+            "mapping_note": classification.get("mapping_note"),
             "indicators": classification.get("indicators", []),
             "alternatives": classification.get("alternatives", []),
+            "method": classification.get("method"),
+            "model": classification.get("model"),
+            "status": classification.get("status"),
+            "is_confident": classification.get("is_confident"),
+            "needs_clarification": classification.get("needs_clarification"),
+            "raw_category": classification.get("raw_category"),
+            "raw_confidence": classification.get("raw_confidence"),
+            "threshold": classification.get("threshold", 0.40),
+            "disclaimer": classification.get("disclaimer"),
+            "traditional_comparison": classification.get("traditional_comparison"),
         },
         risk={
             "level": risk_result.level,

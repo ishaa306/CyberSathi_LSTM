@@ -5,8 +5,10 @@ python-multipart
 
 # Database
 sqlalchemy
+greenlet
 alembic
 asyncpg
+aiosqlite
 
 # Auth & Security
 python-jose[cryptography]
@@ -18,6 +20,7 @@ python-dotenv
 google-generativeai
 
 # ML & NLP
+tensorflow
 scikit-learn
 numpy
 pandas

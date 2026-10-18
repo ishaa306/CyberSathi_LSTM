@@ -7,7 +7,11 @@ export const useComplaintStore = () => {
   const activeComplaint = {
     id: store.activeComplaintId,
     title: rawComplaint?.title || (store.activeComplaintId ? `Case #${store.activeComplaintId}` : 'New Case'),
-    crime_category: rawComplaint?.crime_category || store.classification?.category,
+    crime_category: store.classification?.category || rawComplaint?.authoritative_category || rawComplaint?.crime_category,
+    confidence: store.classification?.confidence ?? rawComplaint?.confidence ?? rawComplaint?.crime_category_confidence,
+    is_confident: store.classification?.is_confident ?? ((store.classification?.confidence ?? rawComplaint?.confidence ?? rawComplaint?.crime_category_confidence ?? 0) >= 0.40),
+    status: store.classification?.status || (((store.classification?.confidence ?? rawComplaint?.confidence ?? rawComplaint?.crime_category_confidence ?? 0) < 0.40 && (store.classification?.confidence ?? rawComplaint?.confidence ?? rawComplaint?.crime_category_confidence ?? null) !== null) ? 'uncertain' : 'confident'),
+    needs_clarification: store.classification?.needs_clarification ?? false,
     risk_level: rawComplaint?.risk_level || store.risk?.level || 'MEDIUM',
     risk_score: rawComplaint?.risk_score !== undefined ? rawComplaint?.risk_score : store.risk?.score,
     incident_date: rawComplaint?.incident_date || store.incidentDate || (store.extractedEntities?.dates?.[0] || null),
@@ -37,6 +41,8 @@ export const useComplaintStore = () => {
       try {
         const res = await api.get(`/api/complaint/${id}`);
         const c = res.data;
+        const cat = c.authoritative_category || c.crime_category;
+        const conf = c.confidence ?? c.crime_category_confidence;
         // update local state
         useStore.setState((s) => ({
           complaintText: c.complaint_text || c.incident_description,
@@ -45,6 +51,13 @@ export const useComplaintStore = () => {
           extractedEntities: c.extracted_entities || s.extractedEntities,
           incidentDate: c.incident_date || s.incidentDate,
           risk: c.risk_level ? { level: c.risk_level, score: c.risk_score } : s.risk,
+          classification: cat ? {
+            category: cat,
+            authoritative_category: cat,
+            confidence: conf,
+            is_confident: conf !== undefined && conf !== null ? conf >= 0.40 : true,
+            status: conf !== undefined && conf !== null && conf < 0.40 ? 'uncertain' : 'confident',
+          } : s.classification,
         }));
       } catch (e) {
         // fallback
@@ -61,6 +74,8 @@ export const useComplaintStore = () => {
     },
     reanalyze: async (complaintId) => {
       const res = await api.post('/api/complaint/generate', { complaint_id: complaintId });
+      const cat = res.data.authoritative_category || res.data.crime_category;
+      const conf = res.data.confidence ?? res.data.crime_category_confidence;
       useStore.setState((s) => ({
         complaintText: res.data.complaint_text,
         timeline: res.data.timeline || s.timeline,
@@ -68,6 +83,13 @@ export const useComplaintStore = () => {
         extractedEntities: res.data.extracted_entities || s.extractedEntities,
         incidentDate: res.data.incident_date || s.incidentDate,
         risk: res.data.risk_level ? { level: res.data.risk_level, score: res.data.risk_score } : s.risk,
+        classification: cat ? {
+          category: cat,
+          authoritative_category: cat,
+          confidence: conf,
+          is_confident: conf !== undefined && conf !== null ? conf >= 0.40 : true,
+          status: conf !== undefined && conf !== null && conf < 0.40 ? 'uncertain' : 'confident',
+        } : s.classification,
       }));
       await store.loadComplaints();
       return res.data;

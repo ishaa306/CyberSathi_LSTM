@@ -72,9 +72,26 @@ MISSING_INFO_CATEGORIES = {
     "Cryptocurrency Fraud": ["amount", "wallet_address", "platform_name", "incident_date"],
     "Social Media Fraud": ["profile_link", "incident_date", "suspect_details"],
     "Other / Unknown": ["amount", "bank_name", "transaction_id", "caller_phone", "incident_date"],
+    # Official NCRP / LSTM Categories
+    "Online Financial Fraud": ["amount", "bank_name", "transaction_id", "suspect_upi_id", "incident_date"],
+    "Online and Social Media Related Crime": ["compromised_platform", "profile_link", "incident_date", "suspect_details"],
+    "Hacking  Damage to computercomputer system etc": ["device_details", "compromised_platform", "suspicious_activity", "incident_date"],
+    "Ransomware": ["device_details", "ransom_demanded", "incident_date"],
+    "Cryptocurrency Crime": ["amount", "wallet_address", "platform_name", "incident_date"],
+    "Online Gambling  Betting": ["amount", "platform_name", "transaction_id", "incident_date"],
+    "Cyber Attack/ Dependent Crimes": ["device_details", "suspicious_activity", "incident_date"],
+    "Cyber Terrorism": ["threat_nature", "incident_date", "suspect_details"],
+    "Online Cyber Trafficking": ["threat_nature", "incident_date", "suspect_details"],
+    "Child Pornography CPChild Sexual Abuse Material CSAM": ["threat_nature", "incident_date", "suspect_details"],
+    "RapeGang Rape RGRSexually Abusive Content": ["threat_nature", "incident_date", "suspect_details"],
+    "Sexually Explicit Act": ["threat_nature", "incident_date", "suspect_details"],
+    "Sexually Obscene material": ["threat_nature", "incident_date", "suspect_details"],
+    "Any Other Cyber Crime": ["amount", "bank_name", "transaction_id", "caller_phone", "incident_date"],
+    "Pending Incident Details": ["incident_details", "incident_date", "financial_loss"],
 }
 
 QUESTION_PROMPTS = {
+    "incident_details": "Could you please describe what happened in your incident — for example, was there a payment scam, account takeover, or suspicious call?",
     "amount": "To include in the official financial loss section, approximately how much money was debited or transferred?",
     "bank_name": "Which bank or payment app (e.g., Google Pay, PhonePe, Paytm, SBI, HDFC) was used for this transaction?",
     "transaction_id": "Do you have the 12-digit UTR number or UPI Transaction ID from your payment receipt or bank SMS?",
@@ -257,6 +274,24 @@ class GeminiService:
                 "immediately call the National Cybercrime Helpline at 1930 and contact your bank "
                 "to freeze your account or card immediately to prevent further loss.\n\n"
             )
+
+        # Check for conversational greeting / non-incident input
+        from app.ml.category_adapter import is_conversational_message
+        if crime_category in ("Pending Incident Details", "Unclassified") or (
+            is_conversational_message(user_message) and not this_entities.get("amounts") and not this_entities.get("transaction_ids")
+        ):
+            greeting_reply = (
+                "Namaste! I am CyberSaathi, your AI cybercrime complaint assistant. "
+                "I am here to help you document this incident step-by-step. "
+                "Please describe what happened in your own words — for example, did someone deceive you into transferring money, "
+                "did you receive a fake job or lottery offer, or has an account or device been compromised? "
+                "You can also upload screenshots or evidence at any time."
+            ) if len(history) <= 2 else (
+                "I am here to help you document and report your cybercrime incident. "
+                "Could you please share a few details about what took place? "
+                "For example, when did it happen, and did you suffer any financial loss, extortion, or account compromise?"
+            )
+            return (safety_alert + greeting_reply).strip()
 
         # 3. Determine next missing field to ask (strictly category-specific)
         required_fields = MISSING_INFO_CATEGORIES.get(crime_category, MISSING_INFO_CATEGORIES["UPI / Payment Fraud"])
@@ -510,6 +545,44 @@ Write ONLY the formal incident description paragraph."""
                 "List of affected files/systems",
                 "Any email/message that led to infection",
                 "Device details",
+            ],
+            # Official NCRP / LSTM Categories
+            "Online Financial Fraud": [
+                "Screenshot of payment confirmation or debit SMS",
+                "Transaction ID / 12-digit UTR number",
+                "Suspect's UPI ID or beneficiary account number",
+                "Bank statement showing debit",
+                "Chat or SMS logs with fraudster",
+            ],
+            "Online and Social Media Related Crime": [
+                "Screenshot of fraudulent or fake profile",
+                "Profile URL / username handle",
+                "Screenshots of abusive or unauthorized messages",
+                "Account recovery emails or notifications",
+            ],
+            "Hacking  Damage to computercomputer system etc": [
+                "Screenshots of locked accounts or unauthorized access notices",
+                "Device details (OS, make, model)",
+                "Security warning emails with IP addresses",
+                "List of modified or compromised data",
+            ],
+            "Ransomware": [
+                "Screenshot of ransom note or locked screen",
+                "List of encrypted files/extensions",
+                "Original suspicious email attachment or download link",
+                "Bitcoin/cryptocurrency address specified by attacker",
+            ],
+            "Cryptocurrency Crime": [
+                "Cryptocurrency transaction hash (TXID)",
+                "Destination wallet address",
+                "Exchange or trading platform name",
+                "Chat logs with suspect or broker",
+            ],
+            "Pending Incident Details": [
+                "Screenshots of suspicious messages, chats, or caller numbers",
+                "Bank transaction SMS or debit receipt (if money was transferred)",
+                "Relevant URLs, fake website links, or application names",
+                "Any email correspondence or documents received",
             ],
         }
         return checklists.get(crime_category, [

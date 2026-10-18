@@ -21,6 +21,16 @@ from app.ml.risk_scorer import calculate_risk_score
 router = APIRouter(prefix="/api/complaint", tags=["Complaint"])
 
 
+def _get_authoritative_category(complaint: Complaint) -> str:
+    """Extract authoritative LSTM prediction if available, else legacy category."""
+    entities = complaint.extracted_entities or {}
+    if entities.get("authoritative_category"):
+        return entities["authoritative_category"]
+    if isinstance(entities.get("lstm_prediction"), dict) and entities["lstm_prediction"].get("authoritative_category"):
+        return entities["lstm_prediction"]["authoritative_category"]
+    return complaint.crime_category or "Other / Unknown"
+
+
 class GenerateRequest(BaseModel):
     complaint_id: int
     payment_method: Optional[str] = None
@@ -76,8 +86,11 @@ async def generate(
     # Generate incident description via Gemini
     gemini = get_gemini_service()
     conversation_text = " ".join(m.content for m in messages if m.role == "user")
+    authoritative_cat = _get_authoritative_category(complaint)
     incident_data = {
-        "crime_category": complaint.crime_category,
+        "crime_category": authoritative_cat,
+        "authoritative_category": authoritative_cat,
+        "legacy_category": complaint.crime_category,
         "financial_loss": complaint.financial_loss,
         "extracted_entities": complaint.extracted_entities,
         "risk_level": complaint.risk_level,
@@ -89,7 +102,9 @@ async def generate(
     complaint_text = generate_complaint(
         user=current_user,
         complaint_data={
-            "crime_category": complaint.crime_category,
+            "crime_category": authoritative_cat,
+            "authoritative_category": authoritative_cat,
+            "legacy_category": complaint.crime_category,
             "crime_category_confidence": complaint.crime_category_confidence,
             "crime_indicators": complaint.crime_indicators or [],
             "risk_level": complaint.risk_level,
@@ -108,8 +123,7 @@ async def generate(
 
     # Generate title
     if not complaint.title:
-        category = complaint.crime_category or "Cybercrime"
-        complaint.title = f"{category} Complaint — {current_user.full_name}"
+        complaint.title = f"{authoritative_cat} Complaint — {current_user.full_name}"
 
     db.add(complaint)
 
@@ -117,7 +131,10 @@ async def generate(
         "complaint_id": complaint.id,
         "title": complaint.title,
         "status": complaint.status,
-        "crime_category": complaint.crime_category,
+        "crime_category": authoritative_cat,
+        "authoritative_category": authoritative_cat,
+        "legacy_category": complaint.crime_category,
+        "confidence": complaint.crime_category_confidence,
         "risk_level": complaint.risk_level,
         "risk_score": complaint.risk_score,
         "incident_date": complaint.incident_date.isoformat() if complaint.incident_date else None,
@@ -166,8 +183,11 @@ async def download_pdf(
 
         gemini = get_gemini_service()
         user_text = " ".join(m.content for m in messages if m.role == "user")
+        authoritative_cat = _get_authoritative_category(complaint)
         desc = gemini.generate_complaint_description({
-            "crime_category": complaint.crime_category,
+            "crime_category": authoritative_cat,
+            "authoritative_category": authoritative_cat,
+            "legacy_category": complaint.crime_category,
             "financial_loss": complaint.financial_loss,
             "extracted_entities": complaint.extracted_entities,
             "risk_level": complaint.risk_level,
@@ -176,7 +196,9 @@ async def download_pdf(
         complaint.complaint_text = generate_complaint(
             user=current_user,
             complaint_data={
-                "crime_category": complaint.crime_category or "Cybercrime",
+                "crime_category": authoritative_cat,
+                "authoritative_category": authoritative_cat,
+                "legacy_category": complaint.crime_category,
                 "crime_category_confidence": complaint.crime_category_confidence or 0.0,
                 "crime_indicators": complaint.crime_indicators or [],
                 "risk_level": complaint.risk_level or "MEDIUM",
@@ -193,10 +215,13 @@ async def download_pdf(
         db.add(complaint)
         await db.flush()
 
+    authoritative_cat = _get_authoritative_category(complaint)
     pdf_bytes = generate_complaint_pdf(
         user=current_user,
         complaint_data={
-            "crime_category": complaint.crime_category,
+            "crime_category": authoritative_cat,
+            "authoritative_category": authoritative_cat,
+            "legacy_category": complaint.crime_category,
             "crime_category_confidence": complaint.crime_category_confidence,
             "crime_indicators": complaint.crime_indicators or [],
             "risk_level": complaint.risk_level,
@@ -238,7 +263,11 @@ async def list_complaints(
                 "id": c.id,
                 "title": c.title or f"Complaint #{c.id}",
                 "status": c.status,
-                "crime_category": c.crime_category,
+                "crime_category": _get_authoritative_category(c),
+                "authoritative_category": _get_authoritative_category(c),
+                "legacy_category": c.crime_category,
+                "confidence": c.crime_category_confidence,
+                "crime_category_confidence": c.crime_category_confidence,
                 "risk_level": c.risk_level,
                 "risk_score": c.risk_score,
                 "financial_loss": c.financial_loss,
@@ -287,8 +316,11 @@ async def get_complaint(
             complaint.timeline = timeline
             gemini = get_gemini_service()
             user_text = " ".join(m.content for m in user_msgs)
+            authoritative_cat = _get_authoritative_category(complaint)
             desc = gemini.generate_complaint_description({
-                "crime_category": complaint.crime_category,
+                "crime_category": authoritative_cat,
+                "authoritative_category": authoritative_cat,
+                "legacy_category": complaint.crime_category,
                 "financial_loss": complaint.financial_loss,
                 "extracted_entities": complaint.extracted_entities,
                 "risk_level": complaint.risk_level,
@@ -297,7 +329,9 @@ async def get_complaint(
             complaint.complaint_text = generate_complaint(
                 user=current_user,
                 complaint_data={
-                    "crime_category": complaint.crime_category or "Cybercrime",
+                    "crime_category": authoritative_cat,
+                    "authoritative_category": authoritative_cat,
+                    "legacy_category": complaint.crime_category,
                     "crime_category_confidence": complaint.crime_category_confidence or 0.0,
                     "crime_indicators": complaint.crime_indicators or [],
                     "risk_level": complaint.risk_level or "MEDIUM",
@@ -314,11 +348,15 @@ async def get_complaint(
             db.add(complaint)
             await db.flush()
 
+    authoritative_cat = _get_authoritative_category(complaint)
     return {
         "id": complaint.id,
         "title": complaint.title,
         "status": complaint.status,
-        "crime_category": complaint.crime_category,
+        "crime_category": authoritative_cat,
+        "authoritative_category": authoritative_cat,
+        "legacy_category": complaint.crime_category,
+        "confidence": complaint.crime_category_confidence,
         "crime_category_confidence": complaint.crime_category_confidence,
         "crime_indicators": complaint.crime_indicators,
         "risk_level": complaint.risk_level,
@@ -412,8 +450,9 @@ async def update_complaint_details(
         hours_elapsed = max(0.0, (datetime.now() - complaint.incident_date).total_seconds() / 3600.0)
 
     user_text = " ".join(m.content for m in messages if m.role == "user")
+    authoritative_cat = _get_authoritative_category(complaint)
     updated_risk = calculate_risk_score(
-        crime_category=complaint.crime_category or "",
+        crime_category=authoritative_cat or complaint.crime_category or "",
         financial_loss=float(complaint.financial_loss or 0.0),
         text=user_text,
         hours_since_incident=hours_elapsed,
@@ -426,7 +465,9 @@ async def update_complaint_details(
     complaint.complaint_text = generate_complaint(
         user=current_user,
         complaint_data={
-            "crime_category": complaint.crime_category or "Cybercrime",
+            "crime_category": authoritative_cat,
+            "authoritative_category": authoritative_cat,
+            "legacy_category": complaint.crime_category,
             "crime_category_confidence": complaint.crime_category_confidence or 0.0,
             "crime_indicators": complaint.crime_indicators or [],
             "risk_level": complaint.risk_level or "MEDIUM",
@@ -451,6 +492,10 @@ async def update_complaint_details(
         "incident_date": complaint.incident_date.isoformat() if complaint.incident_date else None,
         "financial_loss": complaint.financial_loss,
         "payment_method": complaint.payment_method,
+        "crime_category": authoritative_cat,
+        "authoritative_category": authoritative_cat,
+        "confidence": complaint.crime_category_confidence,
+        "crime_category_confidence": complaint.crime_category_confidence,
         "risk_level": complaint.risk_level,
         "risk_score": complaint.risk_score,
         "timeline": complaint.timeline,

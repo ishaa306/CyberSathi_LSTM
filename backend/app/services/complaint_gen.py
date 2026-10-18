@@ -87,6 +87,7 @@ Date: {complaint_date}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 NOTE: This complaint has been prepared with AI assistance.
+This is an AI-generated draft and does not constitute an official legal determination.
 Please review all information before submission.
 For immediate help, call: 1930 (National Cybercrime Helpline)
 Online portal: https://cybercrime.gov.in
@@ -167,12 +168,14 @@ def generate_complaint(
     if incident_times and incident_time_str == "Not specified":
         incident_time_str = incident_times[0]
 
+    category = complaint_data.get("authoritative_category") or entities.get("authoritative_category") or complaint_data.get("crime_category", "Unknown")
+
     complaint_text = COMPLAINT_TEMPLATE.format(
         complainant_name=getattr(user, "full_name", "Complainant"),
         complainant_email=getattr(user, "email", ""),
         complainant_phone=getattr(user, "phone", "Not provided"),
         complaint_date=datetime.now().strftime("%d %B %Y, %I:%M %p"),
-        crime_category=complaint_data.get("crime_category", "Unknown"),
+        crime_category=category,
         confidence=int((complaint_data.get("crime_category_confidence", 0)) * 100),
         risk_level=complaint_data.get("risk_level", "Unknown"),
         incident_date=incident_date_str,

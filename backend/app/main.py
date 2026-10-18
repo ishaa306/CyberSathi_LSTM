@@ -71,9 +71,19 @@ async def startup():
     logger.info(f"[OK] Upload directory ready: {settings.UPLOAD_DIR}")
 
     # Pre-load ML models
-    from app.ml.classifier import get_classifier
-    classifier = get_classifier()
-    logger.info("[OK] Crime classifier ready")
+    try:
+        from app.ml.lstm_classifier import get_lstm_classifier
+        lstm_clf = get_lstm_classifier()
+        logger.info(f"[OK] LSTM classifier ready (loaded={lstm_clf.is_loaded}, classes={lstm_clf.num_classes})")
+    except Exception as e:
+        logger.warning(f"LSTM pre-load warning: {e}")
+
+    try:
+        from app.ml.classifier import get_classifier
+        classifier = get_classifier()
+        logger.info("[OK] Crime classifier ready")
+    except Exception as e:
+        logger.warning(f"Traditional classifier pre-load warning: {e}")
 
 
 @app.on_event("shutdown")
@@ -85,10 +95,17 @@ async def shutdown():
 
 @app.get("/api/health")
 async def health_check():
+    from app.ml.lstm_classifier import get_lstm_classifier
+    lstm = get_lstm_classifier()
     return {
         "status": "healthy",
         "app": settings.APP_NAME,
         "version": settings.APP_VERSION,
+        "ml": {
+            "lstm_loaded": lstm.is_loaded,
+            "classes_count": lstm.num_classes,
+            "primary_model": "LSTM (cybersaathi_lstm_unweighted)",
+        }
     }
 
 

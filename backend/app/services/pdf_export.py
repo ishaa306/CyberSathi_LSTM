@@ -186,8 +186,10 @@ def generate_complaint_pdf(
     if inc_time_str == "Not specified" and entities.get("times"):
         inc_time_str = entities["times"][0]
 
+    display_cat = complaint_data.get("authoritative_category") or entities.get("authoritative_category") or complaint_data.get("crime_category", "Unknown")
+
     classification_data = [
-        ["Crime Category:", complaint_data.get("crime_category", "Unknown")],
+        ["Crime Category:", display_cat],
         ["AI Confidence:", f"{confidence}%"],
         ["Risk Level:", risk_level],
         ["Incident Date:", inc_date_str],
@@ -412,7 +414,8 @@ def generate_complaint_pdf(
     story.append(Spacer(1, 10))
     story.append(HRFlowable(width="100%", thickness=1, color=MID_GRAY))
     footer_style = ParagraphStyle("Footer", fontSize=8, textColor=MID_GRAY, alignment=TA_CENTER, spaceAfter=2)
-    story.append(Paragraph("This complaint was prepared with AI assistance. Please review before submission.", footer_style))
+    story.append(Paragraph("This complaint was prepared with AI assistance (LSTM Deep Learning Classifier).", footer_style))
+    story.append(Paragraph("⚠ Notice: This document is an AI-generated draft and does not constitute an official legal determination.", footer_style))
     story.append(Paragraph("National Cybercrime Helpline: 1930 | Portal: cybercrime.gov.in", footer_style))
     story.append(Paragraph("⚠ This document is confidential and contains sensitive personal information.", footer_style))
 

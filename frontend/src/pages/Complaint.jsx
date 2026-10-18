@@ -287,6 +287,19 @@ export default function ComplaintDraft() {
               <p style={{ fontSize: "0.72rem", color: "#64748b", margin: "0 0 2px" }}>Category</p>
               <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "#f8fafc", margin: 0 }}>
                 {activeComplaint.crime_category || "Pending"}
+                {activeComplaint?.confidence !== undefined && activeComplaint.confidence !== null && activeComplaint.crime_category !== "Pending Incident Details" && (
+                  <span style={{
+                    fontSize: "0.72rem",
+                    color: activeComplaint.confidence < 0.40 ? "#facc15" : "#38bdf8",
+                    marginLeft: "6px"
+                  }}>
+                    ({(Number(activeComplaint.confidence) * 100).toFixed(1)}%
+                    {activeComplaint.confidence < 0.40 ? " · Uncertain" : ""})
+                  </span>
+                )}
+              </p>
+              <p style={{ fontSize: "0.62rem", color: "#64748b", margin: "2px 0 0" }}>
+                AI classification · Not legal determination
               </p>
             </div>
             <div>

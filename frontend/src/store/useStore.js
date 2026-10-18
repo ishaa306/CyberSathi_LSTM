@@ -223,10 +223,15 @@ const useStore = create(
             if (compRes.data.incident_date) {
               update.incidentDate = compRes.data.incident_date;
             }
-            if (compRes.data.crime_category) {
+            if (compRes.data.crime_category || compRes.data.authoritative_category) {
+              const cat = compRes.data.authoritative_category || compRes.data.crime_category;
+              const conf = compRes.data.confidence ?? compRes.data.crime_category_confidence;
               update.classification = {
-                category: compRes.data.crime_category,
-                confidence: compRes.data.crime_category_confidence,
+                category: cat,
+                authoritative_category: cat,
+                confidence: conf,
+                is_confident: conf !== undefined && conf !== null ? conf >= 0.40 : true,
+                status: conf !== undefined && conf !== null && conf < 0.40 ? 'uncertain' : 'confident',
               };
             }
             if (compRes.data.risk_level) {

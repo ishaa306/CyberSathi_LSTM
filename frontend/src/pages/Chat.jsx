@@ -152,18 +152,51 @@ export default function Chat() {
 
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           {activeComplaint?.crime_category && (
-            <span style={{
-              fontFamily: "var(--font-mono, monospace)",
-              fontSize: "0.75rem",
-              background: "rgba(59, 130, 246, 0.12)",
-              border: "1px solid rgba(59, 130, 246, 0.25)",
-              color: "#60a5fa",
-              padding: "4px 10px",
-              borderRadius: "6px",
-              fontWeight: 600,
-            }}>
-              {activeComplaint.crime_category}
-            </span>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+              <span style={{
+                fontFamily: "var(--font-mono, monospace)",
+                fontSize: "0.75rem",
+                background: activeComplaint?.crime_category === "Pending Incident Details"
+                  ? "rgba(148, 163, 184, 0.12)"
+                  : (activeComplaint?.confidence !== undefined && activeComplaint.confidence !== null && activeComplaint.confidence < 0.40)
+                    ? "rgba(234, 179, 8, 0.12)"
+                    : "rgba(56, 189, 248, 0.12)",
+                border: activeComplaint?.crime_category === "Pending Incident Details"
+                  ? "1px solid rgba(148, 163, 184, 0.28)"
+                  : (activeComplaint?.confidence !== undefined && activeComplaint.confidence !== null && activeComplaint.confidence < 0.40)
+                    ? "1px solid rgba(234, 179, 8, 0.35)"
+                    : "1px solid rgba(56, 189, 248, 0.28)",
+                color: activeComplaint?.crime_category === "Pending Incident Details"
+                  ? "#94a3b8"
+                  : (activeComplaint?.confidence !== undefined && activeComplaint.confidence !== null && activeComplaint.confidence < 0.40)
+                    ? "#facc15"
+                    : "#38bdf8",
+                padding: "3px 8px",
+                borderRadius: "6px",
+                fontWeight: 600,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+              }}>
+                <span>
+                  {activeComplaint.crime_category}
+                  {activeComplaint?.confidence !== undefined && activeComplaint.confidence !== null && activeComplaint.confidence < 0.40 && activeComplaint.crime_category !== "Pending Incident Details" && " (Uncertain)"}
+                </span>
+                {activeComplaint?.confidence !== undefined && activeComplaint.confidence !== null && activeComplaint.crime_category !== "Pending Incident Details" && (
+                  <span style={{
+                    color: activeComplaint.confidence < 0.40 ? "#fef08a" : "#93c5fd",
+                    opacity: 0.9,
+                    fontSize: "0.7rem",
+                    fontWeight: 700
+                  }}>
+                    {(Number(activeComplaint.confidence) * 100).toFixed(1)}%
+                  </span>
+                )}
+              </span>
+              <span style={{ fontSize: "0.62rem", color: "#64748b", marginTop: "2px" }}>
+                AI classification · Not legal determination
+              </span>
+            </div>
           )}
           <RiskBadge level={activeComplaint?.risk_level || "MEDIUM"} score={activeComplaint?.risk_score} size="sm" />
           

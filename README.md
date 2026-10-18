@@ -3,23 +3,18 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Active%20Production%20Ready-success?style=for-the-badge&logo=statuspage" alt="Status" />
   <img src="https://img.shields.io/badge/Maintained%3F-Yes-blue?style=for-the-badge" alt="Maintained" />
-  <img src="https://img.shields.io/github/license/Akshay-Notfound/CyberSaathi?style=for-the-badge&color=brightgreen" alt="License" />
-  <img src="https://img.shields.io/github/last-commit/Akshay-Notfound/CyberSaathi?style=for-the-badge&logo=git&logoColor=white" alt="Last Commit" />
-  <img src="https://img.shields.io/github/repo-size/Akshay-Notfound/CyberSaathi?style=for-the-badge&logo=github" alt="Repo Size" />
+  <img src="https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge" alt="License" />
+  <img src="https://img.shields.io/badge/Deep_Learning-LSTM_14--Class-8A2BE2?style=for-the-badge&logo=tensorflow" alt="LSTM" />
+  <img src="https://img.shields.io/badge/Repo-CyberSathi__LSTM-blueviolet?style=for-the-badge&logo=github" alt="Repo" />
 </p>
 
 <p align="center">
   <!-- Core Language & Backend -->
-  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
   <img src="https://img.shields.io/badge/FastAPI-0.115+-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
   <img src="https://img.shields.io/badge/Uvicorn-ASGI-499848?style=for-the-badge&logo=gunicorn&logoColor=white" alt="Uvicorn" />
-  <img src="https://img.shields.io/badge/Pydantic-v2-E92063?style=for-the-badge&logo=pydantic&logoColor=white" alt="Pydantic" />
+  <img src="https://img.shields.io/badge/Keras_%2F_TensorFlow-Deep_Learning-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow" />
   <img src="https://img.shields.io/badge/SQLAlchemy-Async_2.0-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white" alt="SQLAlchemy" />
-
-  <!-- Database & Storage -->
-  <img src="https://img.shields.io/badge/PostgreSQL-v16-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/Supabase-Cloud_DB-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
-  <img src="https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
 
   <!-- Frontend Ecosystem -->
   <img src="https://img.shields.io/badge/React-19.0-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
@@ -27,143 +22,142 @@
   <img src="https://img.shields.io/badge/React_Router-v7-CA4245?style=for-the-badge&logo=react-router&logoColor=white" alt="React Router" />
   <img src="https://img.shields.io/badge/Zustand-State_Management-4338CA?style=for-the-badge" alt="Zustand" />
   <img src="https://img.shields.io/badge/Axios-HTTP_Client-5A29E4?style=for-the-badge&logo=axios&logoColor=white" alt="Axios" />
-  <img src="https://img.shields.io/badge/Chart.js-v4.5-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="Chart.js" />
-  <img src="https://img.shields.io/badge/Lucide_Icons-Modern_UI-F56565?style=for-the-badge" alt="Lucide Icons" />
 
   <!-- AI, NLP, ML & OCR -->
   <img src="https://img.shields.io/badge/Google_Gemini-1.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google Gemini" />
-  <img src="https://img.shields.io/badge/scikit_learn-ML_Pipeline-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-Learn" />
-  <img src="https://img.shields.io/badge/NumPy-Data_Array-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" />
-  <img src="https://img.shields.io/badge/Pandas-DataFrame-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" />
+  <img src="https://img.shields.io/badge/scikit_learn-Evaluation-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-Learn" />
   <img src="https://img.shields.io/badge/Tesseract_OCR-Engine_v5-5C6BC0?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Tesseract OCR" />
-  <img src="https://img.shields.io/badge/PyMuPDF-PDF_Parsing-2B579A?style=for-the-badge" alt="PyMuPDF" />
   <img src="https://img.shields.io/badge/ReportLab-PDF_Generation-D32F2F?style=for-the-badge" alt="ReportLab" />
-
-  <!-- Security & Deployment -->
-  <img src="https://img.shields.io/badge/JWT-HS256_Auth-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white" alt="JWT" />
-  <img src="https://img.shields.io/badge/Bcrypt-Password_Hashing-4A5568?style=for-the-badge" alt="Bcrypt" />
-  <img src="https://img.shields.io/badge/CORS-Protected-38A169?style=for-the-badge" alt="CORS" />
-  <img src="https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
-  <img src="https://img.shields.io/badge/Deploy-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white" alt="Render" />
 </p>
 
 ---
 
-## 🤖 Machine Learning Classifiers & Performance Badges
+## 📌 Overview
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Linear_SVM-Accuracy_52.4%25-0066CC?style=for-the-badge&logo=scikit-learn" alt="Linear SVM" />
-  <img src="https://img.shields.io/badge/Random_Forest-Accuracy_51.6%25-2E7D32?style=for-the-badge&logo=scikit-learn" alt="Random Forest" />
-  <img src="https://img.shields.io/badge/Logistic_Regression-Accuracy_50.8%25-E65100?style=for-the-badge&logo=scikit-learn" alt="Logistic Regression" />
-  <img src="https://img.shields.io/badge/Multinomial_Naive_Bayes-Accuracy_47.6%25-6A1B9A?style=for-the-badge&logo=scikit-learn" alt="Naive Bayes" />
-  <img src="https://img.shields.io/badge/TF--IDF-15%2C000_Features-C2185B?style=for-the-badge" alt="TF-IDF Features" />
-  <img src="https://img.shields.io/badge/NLP_NER-13_Entity_Types-00838F?style=for-the-badge" alt="NLP NER" />
-</p>
+**CyberSaathi** is an AI-powered conversational assistance and automated complaint preparation platform for victims of cybercrime in India. The application guides victims through a supportive, empathetic intake interview, extracts structured forensic identifiers (amounts, UPI IDs, bank accounts, transaction IDs, phone numbers, URLs), assesses case urgency, and generates a verified, formal **10-section cybercrime complaint document (PDF)** ready for submission on the National Cyber Crime Reporting Portal (NCRP) or at local police stations.
 
 ---
 
-## 📌 Problem Statement
+## 🧠 Primary Machine Learning Architecture: CyberSaathi LSTM
 
-Cybercrime victims often face significant trauma and confusion:
-- ❓ **Lack of Technical Clarity**: Victims don't know the exact legal cybercrime nomenclature or sections.
-- 📱 **Fragmented Evidence**: Critical evidence is scattered across SMS logs, payment apps, WhatsApp chat exports, and bank receipts.
-- ⏳ **Delayed Reporting**: Hesitation in filing complaints allows cybercriminals to cash out stolen funds before bank freeze orders.
-- 📑 **Unstructured Statements**: Manual police intake often misses key identifiers like UTR numbers, UPI VPA handles, and caller IDs.
+The primary live classifier in CyberSaathi is a pre-trained **Deep Learning Long Short-Term Memory (LSTM)** neural network configured specifically for multi-class cybercrime narrative classification.
 
-**CyberSaathi** bridges this gap as an **intelligent conversational co-pilot**. It listens to unstructured natural accounts, extracts evidence, classifies crime types across 15 categories, assesses urgency, and formats an official **10-section formal cybercrime complaint draft** ready for filing.
+### Architecture Specifications
+- **Model Framework**: Keras / TensorFlow (`Sequential`)
+- **Input Representation**: Natural language incident narrative
+- **Vocabulary Size**: 30,000 words
+- **Maximum Sequence Length (`MAX_LEN`)**: 200 tokens
+- **Architecture Pipeline**:
+  $$\text{Input Tokens} \longrightarrow \text{Embedding (30,000} \to \text{128)} \longrightarrow \text{SpatialDropout1D (0.2)} \longrightarrow \text{LSTM (64 units)} \longrightarrow \text{Dense (64, ReLU)} \longrightarrow \text{Dropout (0.2)} \longrightarrow \text{Dense (14, Softmax)}$$
+- **Total Parameters**: 11,683,436 (Trainable: 3,894,478)
+- **Primary Model Artifact**: [`cybersaathi_lstm_unweighted/cybersaathi_lstm_unweighted.keras`](cybersaathi_lstm_unweighted/cybersaathi_lstm_unweighted.keras) (44.6 MB)
 
-> ⚠️ **Decision-Support Notice**: CyberSaathi does not replace law enforcement or automatically file police cases without user sign-off. It empowers users to produce accurate, legally sound documentation.
+### 14 Official Output Categories (NCRP Taxonomy)
+1. `Any Other Cyber Crime`
+2. `Child Pornography CPChild Sexual Abuse Material CSAM`
+3. `Cryptocurrency Crime`
+4. `Cyber Attack/ Dependent Crimes`
+5. `Cyber Terrorism`
+6. `Hacking  Damage to computercomputer system etc`
+7. `Online Cyber Trafficking`
+8. `Online Financial Fraud`
+9. `Online Gambling  Betting`
+10. `Online and Social Media Related Crime`
+11. `Ransomware`
+12. `RapeGang Rape RGRSexually Abusive Content`
+13. `Sexually Explicit Act`
+14. `Sexually Obscene material`
 
 ---
 
-## 🚀 Key Modules & System Architecture
+## ⚖️ Scientific Integrity & Reproducible Evaluation
+
+To prevent data leakage and provide genuine, honest academic evaluation:
+- The deployed LSTM was trained on an extensive corpus of ~71,422 complaints.
+- Metrics are **not fabricated** and synthetic data is **not substituted** for a formal test set.
+- The project includes a dedicated, reproducible evaluation engine ([`backend/app/ml/evaluate_lstm.py`](backend/app/ml/evaluate_lstm.py)) that computes:
+  - Overall Test Accuracy
+  - Macro Precision, Recall, and F1-score
+  - Weighted F1-score
+  - Per-class breakdown with support count for all 14 categories (using `scikit-learn` with safe zero-division handling)
+  - 14×14 Confusion Matrix
+
+### Running LSTM Evaluation:
+```bash
+cd backend
+python -m app.ml.evaluate_lstm --test-data path/to/held_out_test_set.csv
+```
+*(Expected CSV columns: `text` or `complaint_text`, and `category` or `crime_category` matching the 14 classes)*
+
+---
+
+## 🚀 Key Modules & System Workflow
 
 ```mermaid
 graph TD
-    A[Victim Account / Natural Language] --> B[Intake Engine]
-    B --> C[Gemini AI / Conversational Assistant]
+    A[Victim Incident Account] --> B[FastAPI Chat Intake]
+    B --> C[Gemini AI Conversational Assistant]
     B --> D[NLP Regex Entity Extraction]
-    A --> E[Evidence Upload: PNG, JPG, PDF]
+    A --> E[Evidence Upload: Images, PDFs]
     E --> F[Tesseract OCR & PyMuPDF]
     F --> D
-    D --> G[Extracted Identifiers: UTR, Phone, UPI, Bank]
-    A --> H[TF-IDF Multi-Model Classifier]
-    H --> I[SVM / Random Forest / Logistic / Naive Bayes]
-    I --> J[15-Category Crime Classification]
-    G & J --> K[Weighted Risk Scoring Engine: CRITICAL/HIGH/MED/LOW]
-    G & J & K --> L[Structured 10-Section Complaint Generator]
-    L --> M[Chronological Incident Timeline]
-    L --> N[Evidence Checklist Verification]
-    L --> O[ReportLab PDF Export Engine]
-    O --> P[Official Complaint Document PDF]
+    D --> G[Extracted Identifiers: UPI, UTR, Bank, Phone]
+    A --> H[CyberSaathi LSTM Classifier]
+    H --> I[14-Class NCRP Classification & Confidence]
+    I --> J[Category Adapter & 40% Uncertainty Guard]
+    G & J --> K[Dynamic Risk Scorer: CRITICAL / HIGH / MED / LOW]
+    G & J & K --> L[10-Section Complaint Generator]
+    L --> M[Interactive Timeline & Evidence Verification]
+    L --> N[ReportLab PDF Export Engine]
+    N --> O[Formal Complaint Document PDF]
 ```
-
----
-
-## 🏷️ 15 Supported Cybercrime Categories
-
-<p align="center">
-  <img src="https://img.shields.io/badge/UPI_%2F_Payment_Fraud-FF6B6B?style=flat-square&logo=google-pay" alt="UPI" />
-  <img src="https://img.shields.io/badge/Banking_Fraud-4ECDC4?style=flat-square" alt="Banking" />
-  <img src="https://img.shields.io/badge/OTP_%2F_Social_Engineering-FFE66D?style=flat-square" alt="OTP" />
-  <img src="https://img.shields.io/badge/Phishing-1A535C?style=flat-square" alt="Phishing" />
-  <img src="https://img.shields.io/badge/Job_%2F_Employment_Fraud-F7FFF7?style=flat-square&color=2E4057" alt="Job Fraud" />
-  <img src="https://img.shields.io/badge/Investment_Fraud-70C1B3?style=flat-square" alt="Investment" />
-  <img src="https://img.shields.io/badge/E--commerce_Fraud-247BA0?style=flat-square" alt="E-commerce" />
-  <img src="https://img.shields.io/badge/Social_Media_Fraud-50514F?style=flat-square" alt="Social Media" />
-  <img src="https://img.shields.io/badge/Account_Compromise-F25F5C?style=flat-square" alt="Compromise" />
-  <img src="https://img.shields.io/badge/Identity_Theft-FFE066?style=flat-square" alt="Identity" />
-  <img src="https://img.shields.io/badge/Impersonation-247BA0?style=flat-square" alt="Impersonation" />
-  <img src="https://img.shields.io/badge/Cyber_Extortion-70C1B3?style=flat-square" alt="Extortion" />
-  <img src="https://img.shields.io/badge/Malware_%2F_Ransomware-E63946?style=flat-square" alt="Ransomware" />
-  <img src="https://img.shields.io/badge/Cryptocurrency_Fraud-F4A261?style=flat-square&logo=bitcoin" alt="Crypto" />
-  <img src="https://img.shields.io/badge/Other_%2F_Unknown-6C757D?style=flat-square" alt="Other" />
-</p>
-
----
-
-## 📊 Benchmark Comparison Table
-
-| Model | Accuracy | Precision (Macro) | Recall (Macro) | F1-Score (Weighted) | Key Strength |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| 🥇 **Linear SVM** | **52.4%** | **53.1%** | **52.4%** | **50.5%** | **Top Performer** on sparse high-dimensional TF-IDF vectors |
-| 🥈 **Random Forest** | 51.6% | 52.0% | 51.6% | 48.9% | Ensemble trees; prevents overfitting on complex sentences |
-| 🥉 **Logistic Regression** | 50.8% | 51.4% | 50.8% | 47.2% | Calibrated sigmoid probabilities for confidence bounds |
-| 🏅 **Multinomial Naive Bayes** | 47.6% | 44.8% | 47.6% | 42.8% | Ultra-fast inference with Laplace smoothing |
 
 ---
 
 ## 📁 Repository Structure
 
 ```text
-cybersaathi/
+CyberSathi/
+├── cybersaathi_lstm_unweighted/        # Pre-trained LSTM Deep Learning Model & Artifacts
+│   ├── cybersaathi_lstm_unweighted.keras # Keras model weights (44.6 MB)
+│   ├── tokenizer.pkl                   # Text tokenizer (30k vocab)
+│   ├── label_encoder.pkl               # 14-class NCRP label encoder
+│   └── config.json                     # MAX_LEN configuration (200 tokens)
 ├── backend/
 │   ├── app/
-│   │   ├── main.py                     # FastAPI application entrypoint & middleware
+│   │   ├── main.py                     # FastAPI application entrypoint & CORS
 │   │   ├── api/                        # auth, chat, complaint, evidence, ml routers
-│   │   ├── core/                       # config, database, security (JWT/bcrypt)
-│   │   ├── ml/                         # classifier, NER, risk scorer, OCR processor
-│   │   ├── models/                     # SQLAlchemy async models
-│   │   ├── schemas/                    # Pydantic validation schemas
-│   │   └── services/                   # Gemini wrapper, complaint generator, PDF export
-│   ├── ml_training/
-│   │   ├── dataset/                    # 15-category training corpus
-│   │   ├── generate_dataset.py         # Synthetic generator
-│   │   └── train_classifier.py         # 4-model trainer and benchmark evaluator
+│   │   │   └── models_comparison.py    # LSTM evaluation & sandbox endpoint
+│   │   ├── core/                       # config, database, JWT security
+│   │   ├── ml/
+│   │   │   ├── lstm_classifier.py      # Primary LSTM inference singleton
+│   │   │   ├── evaluate_lstm.py        # Reproducible scikit-learn evaluation engine
+│   │   │   ├── category_adapter.py     # 14-class to legacy DB schema compatibility
+│   │   │   ├── ner_extractor.py        # Regex & pattern entity extraction
+│   │   │   └── risk_scorer.py          # Financial & urgency weighted risk scoring
+│   │   ├── models/                     # SQLAlchemy async database models
+│   │   └── services/                   # Gemini co-pilot, complaint gen, PDF export
+│   ├── tests/
+│   │   ├── test_lstm_and_integration.py# 17 backend unit and workflow tests
+│   │   ├── test_lstm_evaluation.py     # 7 evaluation engine & API tests
+│   │   └── verify_live.py              # End-to-end live server validation
 │   └── requirements.txt
 ├── frontend/
 │   ├── src/
-│   │   ├── pages/                      # Landing, Login, Register, Dashboard, Chat, Evidence,
-│   │   │                               # ComplaintDraft, MLDashboard
-│   │   ├── components/                 # Navbar, CaseSidebar, RiskBadge, EntityPanel,
-│   │   │                               # ChecklistPanel, TimelinePanel, ModelComparisonChart
-│   │   ├── store/                      # Zustand state: useStore, authStore, complaintStore
-│   │   └── api/client.js               # Centralized Axios client with JWT interceptor
-│   ├── vite.config.js                  # Dev proxy configuration
-│   ├── .env.example
-│   └── index.html
-├── docker-compose.yml                  # PostgreSQL + pgAdmin
-├── .gitignore
+│   │   ├── pages/
+│   │   │   ├── MLDashboard.jsx         # Model Insights & Evaluation page
+│   │   │   ├── Chat.jsx                # Conversational complaint intake
+│   │   │   ├── Complaint.jsx           # Structured complaint review
+│   │   │   ├── Dashboard.jsx           # Case workspace
+│   │   │   └── Evidence.jsx            # Document upload & OCR
+│   │   ├── components/                 # Navbar, EntityPanel, RiskBadge, etc.
+│   │   └── store/                      # Zustand state management
+│   ├── vite.config.js                  # Vite dev server & /api proxy
+│   └── package.json
+├── docker-compose.yml                  # PostgreSQL database container
+├── start_dev.bat                       # One-click Windows development launcher
+├── .gitignore                          # Protected exclusion rules
+├── .env.example                        # Template environment variables
 └── README.md
 ```
 
@@ -172,18 +166,23 @@ cybersaathi/
 ## 🖥️ Getting Started Locally
 
 ### Prerequisites
-* Python `3.10` or higher
-* Node.js `18` or higher
-* Tesseract OCR installed ([Windows Installer](https://github.com/UB-Mannheim/tesseract/wiki), `brew install tesseract`, or `apt install tesseract-ocr`)
-* Optional: Gemini API Key from [aistudio.google.com](https://aistudio.google.com/)
+- Python `3.10` or higher
+- Node.js `18` or higher
+- *(Optional)* Tesseract OCR for document screenshot scanning
 
-### 1. Database Setup
-```bash
-docker-compose up -d
+### 1. One-Click Launch (Windows)
+```powershell
+.\start_dev.bat
 ```
-*(Or use a managed Supabase PostgreSQL connection string in `backend/.env`)*
+This automatically launches:
+- **Backend API**: `http://localhost:8000` (Docs: `http://localhost:8000/api/docs`)
+- **Frontend App**: `http://localhost:5173`
 
-### 2. Backend Installation & Execution
+---
+
+### 2. Manual Step-by-Step Launch
+
+#### A. Backend Setup
 ```bash
 cd backend
 python -m venv venv
@@ -194,17 +193,13 @@ venv\Scripts\activate
 source venv/bin/activate
 
 pip install -r requirements.txt
-cp .env.example .env
+cp ../.env.example .env
 
-# Train ML Classifiers (First time only)
-python -m ml_training.train_classifier
-
-# Launch Backend Server
+# Run FastAPI server:
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
-Swagger UI Docs: **`http://localhost:8000/api/docs`**
 
-### 3. Frontend Installation & Execution
+#### B. Frontend Setup
 ```bash
 cd frontend
 npm install
@@ -214,12 +209,12 @@ Open **`http://localhost:5173`** in your browser.
 
 ---
 
-## 🔒 Security Measures
-- **Password Security**: Passwords hashed with `bcrypt` (salt rounds configured).
-- **Session Tokens**: Stateless `JWT (JSON Web Tokens)` with HMAC-SHA256 signature and expiration timeouts.
-- **Input Sanitization**: File type MIME validation and 15MB file size limits prior to disk storage.
-- **Privacy First**: Evidence files are stored locally in secure directories and never exposed publicly.
-- **CORS Protection**: Restricted strictly to authorized frontend origins.
+### 3. Running Backend Tests
+```bash
+cd backend
+venv\Scripts\python.exe -m pytest tests\
+```
+*All 24 automated tests pass (covering LSTM loading, 14 classes, thresholding, risk scoring, evaluation engine, and API endpoints).*
 
 ---
 
@@ -233,8 +228,6 @@ Open **`http://localhost:5173`** in your browser.
 
 ---
 
-## 📜 License & Acknowledgements
+## 📜 License
 
 This project is licensed under the **MIT License**.
-
-Developed for academic research and cyber defense enablement. Designed to support digital literacy and rapid cybercrime incident response across India.
